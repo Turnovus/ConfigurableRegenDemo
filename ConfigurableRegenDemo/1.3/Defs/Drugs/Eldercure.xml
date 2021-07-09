@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ThingDef ParentName="DrugPillBase">
+		<defName>Eldercure</defName>
+		<label>eldercure</label>
+		<description>An advanced curative for fraility and back backs.</description>
+		<graphicData>
+			<texPath>Things/Item/Drug/Gojuice</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MarketValue>70</MarketValue>
+			<Mass>0.01</Mass>
+		</statBases>
+		<techLevel>Ultra</techLevel>
+		<minRewardCount>10</minRewardCount>
+		<ingestible>
+			<drugCategory>Medical</drugCategory>
+			<outcomeDoers>
+				<li Class="IngestionOutcomeDoer_GiveHediff">
+					<hediffDef>EldercureHigh</hediffDef>
+					<severity>1.00</severity>
+				</li>
+			</outcomeDoers>
+		</ingestible>
+		<comps>
+			 <li Class="CompProperties_Drug">
+				<listOrder>1023</listOrder>
+				<overdoseSeverityOffset>0.08~0.14</overdoseSeverityOffset>
+			</li>
+		</comps>
+		<tradeTags>
+			<li>ExoticMisc</li>
+		</tradeTags>
+		<thingSetMakerTags><li>RewardStandardHighFreq</li></thingSetMakerTags>
+	</ThingDef>
+	
+	<HediffDef>
+		<defName>EldercureHigh</defName>
+		<hediffClass>Hediff_High</hediffClass>
+		<label>eldercure</label>
+		<description>Heals fraility and bad backs.</description>
+		<defaultLabelColor>(1,1,0.5)</defaultLabelColor>
+		<scenarioCanAdd>true</scenarioCanAdd>
+		<maxSeverity>1.0</maxSeverity>
+		<isBad>false</isBad>
+		
+		<comps>
+			<li Class="LimitedRegen.HediffCompProperties_HealPermanentWoundsConfigurable">
+				<whitelist>
+					<li>BadBack</li>
+					<li>Frail</li>
+				</whitelist>
+				<!--Will heal 10 times at most, 5 at least-->
+				<regenInterval>1~2</regenInterval>
+				<!--A tenth of a day-->
+				<regenIntervalTicks>6000</regenIntervalTicks>
+				<!--Only 2 conditions are whitelisted, so it only needs to work twice-->
+				<usesBeforeExhaustion>2</usesBeforeExhaustion>
+			</li>
+		</comps>
+		
+		<stages><li><painFactor>1.10</painFactor></li></stages>
+	</HediffDef>
+	
+</Defs>

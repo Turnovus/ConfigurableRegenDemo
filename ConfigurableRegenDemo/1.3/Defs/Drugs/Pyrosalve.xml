@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ThingDef ParentName="DrugPillBase">
+		<defName>Pyrosalve</defName>
+		<label>pyrosalve</label>
+		<description>An advanced curative based on smokeleaf, can heal burn scars. The smokeleaf may leak into the bloodstream because I have to test this stuff out somehow.</description>
+		<graphicData>
+			<texPath>Things/Item/Drug/Luciferium</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MarketValue>70</MarketValue>
+			<Mass>0.01</Mass>
+		</statBases>
+		<techLevel>Ultra</techLevel>
+		<minRewardCount>10</minRewardCount>
+		<ingestible>
+			<drugCategory>Medical</drugCategory>
+			<outcomeDoers>
+				<li Class="IngestionOutcomeDoer_GiveHediff">
+					<hediffDef>PyrosalveHigh</hediffDef>
+					<severity>1.00</severity>
+				</li>
+			</outcomeDoers>
+		</ingestible>
+		<comps>
+			 <li Class="CompProperties_Drug">
+				<listOrder>1021</listOrder>
+				<overdoseSeverityOffset>0.08~0.14</overdoseSeverityOffset>
+			</li>
+		</comps>
+		<tradeTags>
+			<li>ExoticMisc</li>
+		</tradeTags>
+		<thingSetMakerTags><li>RewardStandardHighFreq</li></thingSetMakerTags>
+	</ThingDef>
+	
+	<HediffDef>
+		<defName>PyrosalveHigh</defName>
+		<hediffClass>Hediff_High</hediffClass>
+		<label>pyrosalve</label>
+		<description>Heals burn scars, may cause highness.</description>
+		<defaultLabelColor>(1,1,0.5)</defaultLabelColor>
+		<scenarioCanAdd>true</scenarioCanAdd>
+		<maxSeverity>1.0</maxSeverity>
+		<isBad>false</isBad>
+		
+		<comps>
+			<li Class="HediffCompProperties_SeverityPerDay">
+				<severityPerDay>-1.00</severityPerDay>
+				<showHoursToRecover>true</showHoursToRecover>
+			</li>
+			<li Class="LimitedRegen.HediffCompProperties_HealPermanentWoundsConfigurable">
+				<regenHediffs>
+					<li Class="LimitedRegen.RegenSideEffect">
+						<hediffDef>SmokeleafHigh</hediffDef>
+						<!--One joint, give or take-->
+						<severity>0.02~0.04</severity>
+						<percentChance>0.30</percentChance>
+						<isGlobalHediff>true</isGlobalHediff>
+					</li>
+				</regenHediffs>
+				<whitelist>
+					<li>Burn</li>
+				</whitelist>
+				<!--Will heal 10 times at most, 5 at least-->
+				<regenInterval>1~2</regenInterval>
+				<!--A tenth of a day-->
+				<regenIntervalTicks>6000</regenIntervalTicks>
+			</li>
+		</comps>
+		
+		<stages><li><painFactor>1.10</painFactor></li></stages>
+	</HediffDef>
+	
+</Defs>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ThingDef ParentName="DrugPillBase">
+		<defName>Sickfix</defName>
+		<label>sickfix</label>
+		<description>An almost magical drug that can treat any permanent illness, but not injuries.</description>
+		<graphicData>
+			<texPath>Things/Item/Drug/Luciferium</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MarketValue>70</MarketValue>
+			<Mass>0.01</Mass>
+		</statBases>
+		<techLevel>Ultra</techLevel>
+		<minRewardCount>10</minRewardCount>
+		<ingestible>
+			<drugCategory>Medical</drugCategory>
+			<outcomeDoers>
+				<li Class="IngestionOutcomeDoer_GiveHediff">
+					<hediffDef>SickfixHigh</hediffDef>
+					<severity>1.00</severity>
+				</li>
+			</outcomeDoers>
+		</ingestible>
+		<comps>
+			 <li Class="CompProperties_Drug">
+				<listOrder>1024</listOrder>
+				<overdoseSeverityOffset>0.08~0.14</overdoseSeverityOffset>
+			</li>
+		</comps>
+		<tradeTags>
+			<li>ExoticMisc</li>
+		</tradeTags>
+		<thingSetMakerTags><li>RewardStandardHighFreq</li></thingSetMakerTags>
+	</ThingDef>
+	
+	<HediffDef>
+		<defName>SickfixHigh</defName>
+		<hediffClass>Hediff_High</hediffClass>
+		<label>sickfix</label>
+		<description>Will restore a single permanent non-injury.</description>
+		<defaultLabelColor>(1,1,0.5)</defaultLabelColor>
+		<scenarioCanAdd>true</scenarioCanAdd>
+		<maxSeverity>1.0</maxSeverity>
+		<isBad>false</isBad>
+		
+		<comps>
+			<li Class="LimitedRegen.HediffCompProperties_HealPermanentWoundsConfigurable">
+				<regenInterval>1~1</regenInterval>
+				<regenIntervalTicks>600</regenIntervalTicks>
+				<injuryRegenListMode>Blacklist</injuryRegenListMode>
+				<usesBeforeExhaustion>1</usesBeforeExhaustion>
+			</li>
+		</comps>
+		
+		<!--<stages><li><painFactor>1.10</painFactor></li></stages>-->
+	</HediffDef>
+	
+</Defs>
